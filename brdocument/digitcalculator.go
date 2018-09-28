@@ -22,7 +22,7 @@ type DigitCalculator struct {
 func NewDigitCalculator(number string) *DigitCalculator {
 	dc := &DigitCalculator{}
 
-	dc.numbers = convertToInt(strings.Split(reverseNumber(number), ""))
+	dc.numbers = convertToInt(strings.Split(ReverseNumber(number), ""))
 	dc.WithMultipliersInterval(2, 9)
 	dc.WithModule(Module11)
 	dc.MultiplySumBy(1)
@@ -98,7 +98,7 @@ func (dc *DigitCalculator) ReplaceWhen(replaceTo int, replacingNumbers []int) {
 	dc.replacements = rep
 }
 
-func reverseNumber(s string) string {
+func ReverseNumber(s string) string {
 	chars := []rune(s)
 	for i, j := 0, len(chars)-1; i < j; i, j = i+1, j-1 {
 		chars[i], chars[j] = chars[j], chars[i]
