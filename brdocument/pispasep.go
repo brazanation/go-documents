@@ -1,6 +1,7 @@
 package brdocument
 
 import (
+	"fmt"
 	"regexp"
 )
 
@@ -20,4 +21,16 @@ func (document Document) NewPisPasep(number string) (Document) {
 func (document Document) FormatPisPasep() (string) {
 	regex := regexp.MustCompile(PISPASEP_REGEX)
 	return regex.ReplaceAllString(document.number, "$1.$2.$3-$4")
+}
+
+func (document Document) CalculatePisPasepDigit() (string) {
+	calculator := NewDigitCalculator(document.ExtractBaseNumber(document.number))
+	calculator.WithMultipliersInterval(2, 9)
+	calculator.UseComplementaryInsteadOfModule()
+	calculator.ReplaceWhen(0, []int{10,11})
+	calculator.WithModule(Module11)
+
+	digit := calculator.Calculate()
+	calculator.AddDigit(digit)
+	return fmt.Sprintf("%d", digit)
 }
