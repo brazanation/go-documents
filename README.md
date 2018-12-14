@@ -22,6 +22,20 @@ If you want to get an specific version, please use the example below:
 go get gopkg.in/brazanation/go-documents.v0
 ```
 
+## CPF (cadastro de pessoas físicas)
+```
+import "github.com/brazanation/go-documents"
+
+...
+
+document, err := brdocs.NewCpf("06843273173")
+if err != nil {
+    panic(err)
+}
+print(document.ToString()) // prints 06843273173
+print(document.Format()) // prints 068.432.731-73
+```
+
 ## Development
 
 ### Requirements

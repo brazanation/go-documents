@@ -1,4 +1,4 @@
-package brdocument
+package utils
 
 import (
 	"math"

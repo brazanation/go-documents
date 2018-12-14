@@ -1,1 +1,4 @@
 cover*
+.idea
+.DS_Store
+app
