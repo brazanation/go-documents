@@ -53,6 +53,18 @@ make test
 
 Read the full documentation at [https://godoc.org/github.com/brazanation/go-documents](https://godoc.org/github.com/brazanation/go-documents).
 
+### CNPJ (cadastro nacional da pessoa jurídica)
+
+Company Identification or National Register of Legal Entities
+
+```go
+doc, err := brdocs.NewCnpj("99999090910270")
+if err != nil {
+    panic(err)
+}
+println(doc.String()) // prints 99999090910270
+println(doc.Format()) // prints 99.999.090/9102-70
+```
 
 ## License
 
