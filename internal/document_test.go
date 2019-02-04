@@ -2,6 +2,7 @@ package internal_test
 
 import (
 	"github.com/brazanation/go-documents/internal"
+	"github.com/brazanation/go-documents/internal/test"
 	"testing"
 )
 
@@ -19,98 +20,84 @@ func (c CalculatorStub) CalculateDigit(base string) string {
 	return c.result
 }
 
-func TestDocument(t *testing.T) {
-	t.Run("Should create a dummy document similar a Cpf", func(t *testing.T) {
-		digit := "73"
-		d, err := internal.NewDocument(
-			testDocument,
-			"06843273173",
-			11,
-			2,
-			formatterRegex,
-			validatorRegex,
-			CalculatorStub{digit},
-		)
+func TestDocumentShouldBeValid(t *testing.T) {
+	d, err := internal.NewDocument(
+		testDocument,
+		"06843273173",
+		11,
+		2,
+		formatterRegex,
+		validatorRegex,
+		CalculatorStub{"73"},
+	)
+	internal_test.AssertValidDocument(t, d, err)
+}
 
-		if err != nil {
-			t.Errorf("Failed asserting that not occurred error on create new document")
-		}
+func TestDocumentShouldBeSameType(t *testing.T) {
+	d, _ := internal.NewDocument(
+		testDocument,
+		"06843273173",
+		11,
+		2,
+		formatterRegex,
+		validatorRegex,
+		CalculatorStub{"73"},
+	)
+	internal_test.AssertDocumentType(t, d, testDocument)
+}
 
-		if !d.IsSameDigit(digit) {
-			t.Errorf("Failed asserting that digit is %s", digit)
-		}
+func TestDocumentShouldBeFormatted(t *testing.T) {
+	d, err := internal.NewDocument(
+		testDocument,
+		"06843273173",
+		11,
+		2,
+		formatterRegex,
+		validatorRegex,
+		CalculatorStub{"73"},
+	)
+	internal_test.AssertValidDocument(t, d, err)
+	internal_test.AssertDocumentFormatted(t, d, "068.432.731-73")
+}
 
-		if d.String() != "06843273173" {
-			t.Errorf("Failed asserting that number is equal to %s", "06843273173")
-		}
+func TestDocumentShouldReturnErrorForRepeatedNumber(t *testing.T) {
+	number := "11111111111111"
+	_, err := internal.NewDocument(
+		testDocument,
+		number,
+		11,
+		2,
+		formatterRegex,
+		validatorRegex,
+		CalculatorStub{""},
+	)
+	internal_test.AssertNotValidDocument(t, number, err, "Test(11111111111111) is invalid")
+}
 
-		if d.Format() != "068.432.731-73" {
-			t.Errorf("Failed asserting that number is formatted as %s", "068.432.731-73")
-		}
-	})
+func TestDocumentShouldReturnErrorForInvalidNumber(t *testing.T) {
+	number := "00111222100099"
+	_, err := internal.NewDocument(
+		testDocument,
+		number,
+		11,
+		2,
+		formatterRegex,
+		validatorRegex,
+		CalculatorStub{""},
+	)
+	internal_test.AssertNotValidDocument(t, number, err, "Test(00111222100099) is invalid")
+}
 
-	t.Run("Should not create a dummy document", func(t *testing.T) {
-		d, err := internal.NewDocument(
-			testDocument,
-			"06843273173",
-			11,
-			2,
-			"",
-			"",
-			CalculatorStub{"00"},
-		)
-
-		if err == nil {
-			t.Errorf("Failed asserting that occurred error on create new document")
-		}
-
-		if err.Error() != "Test(06843273173) is invalid" {
-			t.Errorf("Failed asserting that error message \"%s\" for invalid document", err.Error())
-		}
-
-		if !d.Is(testDocument) {
-			t.Errorf("Failed asserting that document is a %s", testDocument)
-		}
-	})
-
-	t.Run("Should not create a empty document", func(t *testing.T) {
-		_, err := internal.NewDocument(
-			testDocument,
-			"",
-			11,
-			2,
-			"",
-			"",
-			CalculatorStub{"00"},
-		)
-
-		if err == nil {
-			t.Errorf("Failed asserting that occurred error on create empty document")
-		}
-
-		if err.Error() != "Test must not be empty" {
-			t.Errorf("Failed asserting that error message \"%s\" for empty document", err.Error())
-		}
-	})
-
-	t.Run("Should not create document with repeated number", func(t *testing.T) {
-		_, err := internal.NewDocument(
-			testDocument,
-			"11111111111",
-			11,
-			2,
-			"",
-			"",
-			CalculatorStub{""},
-		)
-
-		if err == nil {
-			t.Errorf("Failed asserting that occurred error on create empty document")
-		}
-
-		if err.Error() != "Test(11111111111) is invalid" {
-			t.Errorf("Failed asserting that error message \"%s\" for empty document", err.Error())
-		}
-	})
-
+func TestDocumentShouldReturnErrorForEmptyNumber(t *testing.T) {
+	number := ``
+	_, err := internal.NewDocument(
+		testDocument,
+		number,
+		11,
+		2,
+		formatterRegex,
+		validatorRegex,
+		CalculatorStub{""},
+	)
+	internal_test.AssertNotValidDocument(t, number, err, "Test must not be empty")
 }

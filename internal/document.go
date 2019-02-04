@@ -11,17 +11,13 @@ type Formattable interface {
 	Format() string
 }
 
-type Stringable interface {
-	String() string
-}
-
 // Document base structure
 type Document struct {
 	label          DocumentType
 	number         string
 	digit          string
-	Length         int
-	NumberOfDigits int
+	length         int
+	numberOfDigits int
 	regexFormatter string
 	regexValidator string
 	calculator     calculator.DigitCalculatable
@@ -41,14 +37,14 @@ func NewDocument(
 	d := Document{
 		label:          label,
 		number:         n,
-		Length:         length,
-		NumberOfDigits: numberOfDigits,
+		length:         length,
+		numberOfDigits: numberOfDigits,
 		regexFormatter: regexFormatter,
 		regexValidator: regexValidation,
 		calculator:     calculator,
 	}
 
-	d.digit = d.ExtractCheckerDigit()
+	d.digit = d.extractCheckerDigit()
 
 	err := d.Assert()
 
@@ -62,6 +58,7 @@ func NewDocument(
 func (d Document) Is (t DocumentType) bool {
 	return d.label == t
 }
+
 // 	String returns a string with the Document number unformatted
 func (d Document) String() string {
 	return d.number
@@ -73,18 +70,18 @@ func (d Document) Format() string {
 	return regex.ReplaceAllString(d.number, d.regexFormatter)
 }
 
-// ExtractCheckerDigit returns the verificator digit of a Document
-func (d Document) ExtractCheckerDigit() string {
+// extractCheckerDigit returns the verificator digit of a Document
+func (d Document) extractCheckerDigit() string {
 	runes := []rune(d.number)
-	digits := d.Length - d.NumberOfDigits
-	return string(runes[digits:d.Length])
+	digits := d.length - d.numberOfDigits
+	return string(runes[digits:d.length])
 }
 
-// ExtractBaseNumber returns the base number of a Cpf
-func (d Document) ExtractBaseNumber() string {
+// extractBaseNumber returns the base number of a Cpf
+func (d Document) extractBaseNumber() string {
 	baseDocument := ""
 	for k, digit := range []byte(d.number) {
-		if k <= (len(d.number) - int(d.NumberOfDigits) - 1) {
+		if k <= (len(d.number) - int(d.numberOfDigits) - 1) {
 			baseDocument += string(digit)
 		}
 	}
@@ -105,7 +102,7 @@ func (d *Document) Assert() error {
 }
 
 func (d Document) isValid() bool {
-	baseNumber := d.ExtractBaseNumber()
+	baseNumber := d.extractBaseNumber()
 	regex := regexp.MustCompile("^[" + string(baseNumber[0]) + "]+$")
 	isRepeated := regex.MatchString(baseNumber)
 
@@ -113,7 +110,7 @@ func (d Document) isValid() bool {
 		return false
 	}
 
-	digit := d.calculator.CalculateDigit(d.ExtractBaseNumber())
+	digit := d.calculator.CalculateDigit(baseNumber)
 
 	return d.IsSameDigit(digit)
 }
