@@ -23,7 +23,7 @@ func AssertDocumentType(t *testing.T, d internal.Document, dt internal.DocumentT
 }
 
 func AssertDocumentFormatted(t *testing.T, d internal.Document, formatted string) {
-	t.Run(fmt.Sprintf("assert valid Document(%s)", d.String()), func(t *testing.T) {
+	t.Run(fmt.Sprintf("assert Document(%s) format", d.String()), func(t *testing.T) {
 		f := d.Format()
 		if f != formatted {
 			t.Errorf("Failed on asserting that document format expected is %s, but actual %s", formatted, f)
@@ -32,7 +32,7 @@ func AssertDocumentFormatted(t *testing.T, d internal.Document, formatted string
 }
 
 func AssertNotValidDocument(t *testing.T, number string, err error, expected string) {
-	t.Run(fmt.Sprintf("assert valid Document(%s)", number), func(t *testing.T) {
+	t.Run(fmt.Sprintf("assert invalid Document(%s)", number), func(t *testing.T) {
 		if err != nil && err.Error() != expected {
 			t.Errorf("Failed on asserting invalid error message: %s", err.Error())
 		}
