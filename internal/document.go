@@ -112,9 +112,9 @@ func (d Document) isValid() bool {
 
 	digit := d.calculator.CalculateDigit(baseNumber)
 
-	return d.IsSameDigit(digit)
+	return d.isSameDigit(digit)
 }
 
-func (d *Document) IsSameDigit(digit string) bool {
+func (d *Document) isSameDigit(digit string) bool {
 	return d.digit == digit
 }
