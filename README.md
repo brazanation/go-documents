@@ -66,6 +66,18 @@ println(doc.String()) // prints 99999090910270
 println(doc.Format()) // prints 99.999.090/9102-70
 ```
 
+### CNH (carteira nacional de habilitação)
+
+National Driving License
+```go
+doc, err := brdocs.NewCnh("83592802666")
+if err != nil {
+    panic(err)
+}
+println(doc.String()) // prints 83592802666
+println(doc.Format()) // prints 83592802666
+```
+
 ## License
 
 This project is released under the MIT licence. See [LICENSE](https://github.com/brazanation/go-documents/blob/master/LICENSE) for more details.
