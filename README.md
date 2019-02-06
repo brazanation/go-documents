@@ -82,7 +82,7 @@ println(doc.Format()) // prints 83592802666
 
 Social Integration Program and Training Program of the Heritage of Public Servant
 
-```php
+```go
 doc, err := brdocs.NewPisPasep("51823129491")
 if err != nil {
     panic(err)
@@ -90,6 +90,20 @@ if err != nil {
 println(doc.String()) // prints 51823129491
 println(doc.Format()) // prints 518.23129.49-1
 ```
+
+### Título de Eleitor
+
+Voter Registration
+
+```go
+doc, err := brdocs.NewVoter("247003181023")
+if err != nil {
+    panic(err)
+}
+println(doc.String()) // prints 247003181023
+println(doc.Format()) // prints 247003181023
+```
+
 ## License
 
 This project is released under the MIT licence. See [LICENSE](https://github.com/brazanation/go-documents/blob/master/LICENSE) for more details.
