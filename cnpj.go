@@ -15,10 +15,10 @@ const (
 	cnpjFormatterRegex string = "$1.$2.$3/$4-$5"
 )
 
-type Cnpj struct {
+type cnpj struct {
 }
 
-// NewCnpj is the constructor of Cnpj
+// NewCnpj is the constructor of cnpj
 func NewCnpj(number string) (internal.Document, error) {
 	d, err := internal.NewDocument(
 		CnpjType,
@@ -27,12 +27,12 @@ func NewCnpj(number string) (internal.Document, error) {
 		cnpjNumberOfDigits,
 		cnpjFormatterRegex,
 		cnpjValidatorRegex,
-		Cnpj{},
+		cnpj{},
 	)
 	return d, err
 }
 
-func (cnpj Cnpj) CalculateDigit(base string) string {
+func (cnpj cnpj) CalculateDigit(base string) string {
 	c := calculator.NewModule11(base)
 	c.UseComplementaryInsteadOfModule()
 	c.ReplaceWhen(0, 10, 11)
