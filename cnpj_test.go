@@ -11,7 +11,7 @@ func TestCnpjShouldBeValid(t *testing.T) {
 	internal_test.AssertValidDocument(t, cnpj, err)
 }
 
-func TestDocumentShouldBeSameType(t *testing.T) {
+func TestCnpjShouldBeSameType(t *testing.T) {
 	cnpj, _ := brdocs.NewCnpj("99999090910270")
 	internal_test.AssertDocumentType(t, cnpj, brdocs.CnpjType)
 }
