@@ -78,6 +78,18 @@ println(doc.String()) // prints 83592802666
 println(doc.Format()) // prints 83592802666
 ```
 
+### PIS/PASEP (programa de integração social e programa de formação do patrimônio do servidor público)
+
+Social Integration Program and Training Program of the Heritage of Public Servant
+
+```php
+doc, err := brdocs.NewPisPasep("51823129491")
+if err != nil {
+    panic(err)
+}
+println(doc.String()) // prints 51823129491
+println(doc.Format()) // prints 518.23129.49-1
+```
 ## License
 
 This project is released under the MIT licence. See [LICENSE](https://github.com/brazanation/go-documents/blob/master/LICENSE) for more details.
