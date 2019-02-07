@@ -31,7 +31,7 @@ func NewDocument(
 	regexFormatter string,
 	regexValidation string,
 	calculator calculator.DigitCalculatable) (Document, error) {
-	regex := regexp.MustCompile(`/\D/`)
+	regex := regexp.MustCompile(`\D`)
 	n := regex.ReplaceAllString(number, ``)
 
 	d := Document{
