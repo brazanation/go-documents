@@ -25,17 +25,17 @@ func TestCnhShouldBeFormatted(t *testing.T) {
 func TestCnhShouldReturnErrorForRepeatedNumber(t *testing.T) {
 	number := "11111111111"
 	_, err := brdocs.NewCnh(number)
-	internal_test.AssertNotValidDocument(t, number, err, "cnh(11111111111) is invalid")
+	internal_test.AssertNotValidDocument(t, number, err, "Cnh(11111111111) is invalid")
 }
 
 func TestCnhShouldReturnErrorForInvalidNumber(t *testing.T) {
 	number := "83592802655"
 	_, err := brdocs.NewCnh(number)
-	internal_test.AssertNotValidDocument(t, number, err, "cnh(83592802655) is invalid")
+	internal_test.AssertNotValidDocument(t, number, err, "Cnh(83592802655) is invalid")
 }
 
 func TestCnhShouldReturnErrorForEmptyNumber(t *testing.T) {
 	number := ``
 	_, err := brdocs.NewCnh(number)
-	internal_test.AssertNotValidDocument(t, number, err, "cnh must not be empty")
+	internal_test.AssertNotValidDocument(t, number, err, "Cnh must not be empty")
 }

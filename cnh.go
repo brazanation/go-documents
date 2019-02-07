@@ -6,7 +6,7 @@ import (
 	"github.com/brazanation/go-documents/internal/calculator"
 )
 
-const CnhType internal.DocumentType = "cnh"
+const CnhType internal.DocumentType = "Cnh"
 
 const (
 	cnhLength         int    = 11
