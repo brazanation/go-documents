@@ -53,6 +53,19 @@ make test
 
 Read the full documentation at [https://godoc.org/github.com/brazanation/go-documents](https://godoc.org/github.com/brazanation/go-documents).
 
+### CPF (cadastro de pessoas físicas)
+
+Registration of individuals or Tax Identification
+
+```go
+doc, err := brdocs.NewCnpj("06843273173")
+if err != nil {
+    panic(err)
+}
+println(doc.String()) // prints 06843273173
+println(doc.Format()) // prints 068.432.731-73
+```
+
 ### CNPJ (cadastro nacional da pessoa jurídica)
 
 Company Identification or National Register of Legal Entities
