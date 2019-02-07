@@ -7,7 +7,7 @@ import (
 )
 
 func TestPisPasepShouldBeValid(t *testing.T) {
-	pis, err := brdocs.NewPisPasep("51823129491")
+	pis, err := brdocs.NewPisPasep("21823129490")
 	internal_test.AssertValidDocument(t, pis, err)
 }
 

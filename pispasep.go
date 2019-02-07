@@ -36,7 +36,7 @@ func (pisPasep pisPasep) CalculateDigit(base string) string {
 	c := calculator.NewModule11(base)
 	c.WithMultipliersInterval(2, 9);
 	c.UseComplementaryInsteadOfModule();
-	c.ReplaceWhen('0', 10, 11);
+	c.ReplaceWhen(0, 10, 11);
 	digit := c.Calculate();
 	return fmt.Sprintf("%d", digit)
 }
