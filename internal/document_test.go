@@ -49,7 +49,7 @@ func TestDocumentShouldBeSameType(t *testing.T) {
 func TestDocumentShouldBeFormatted(t *testing.T) {
 	d, err := internal.NewDocument(
 		testDocument,
-		"06843273173",
+		"068.432.731-73",
 		11,
 		2,
 		formatterRegex,
