@@ -82,6 +82,7 @@ println(doc.Format()) // prints 99.999.090/9102-70
 ### CNH (carteira nacional de habilitação)
 
 National Driving License
+
 ```go
 doc, err := brdocs.NewCnh("83592802666")
 if err != nil {
@@ -89,6 +90,19 @@ if err != nil {
 }
 println(doc.String()) // prints 83592802666
 println(doc.Format()) // prints 83592802666
+```
+
+### Cartão Nacional de Saúde (SUS)
+
+National Health Card
+
+```go
+doc, err := brdocs.NewCns("242912018460005")
+if err != nil {
+    panic(err)
+}
+println(doc.String()) // prints 242912018460005
+println(doc.Format()) // prints 242 9120 1846 0005
 ```
 
 ### PIS/PASEP (programa de integração social e programa de formação do patrimônio do servidor público)
