@@ -58,7 +58,7 @@ Read the full documentation at [https://godoc.org/github.com/brazanation/go-docu
 Registration of individuals or Tax Identification
 
 ```go
-doc, err := brdocs.NewCnpj("06843273173")
+doc, err := brdocs.NewCpf("06843273173")
 if err != nil {
     panic(err)
 }
