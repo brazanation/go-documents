@@ -131,6 +131,19 @@ println(doc.String()) // prints 247003181023
 println(doc.Format()) // prints 247003181023
 ```
 
+### Renavam (Registro Nacional de Veículos Automotores)
+
+National Registry of Motor Vehicles
+
+```go
+doc, err := brdocs.NewRenavam("61855253306")
+if err != nil {
+    panic(err)
+}
+println(doc.String()) // prints 61855253306
+println(doc.Format()) // prints 6185.525330-6
+```
+
 ## License
 
 This project is released under the MIT licence. See [LICENSE](https://github.com/brazanation/go-documents/blob/master/LICENSE) for more details.
