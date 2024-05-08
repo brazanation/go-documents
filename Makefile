@@ -12,8 +12,7 @@ cover: test
 
 # Download dependencies
 depend:
-	@go get -u gopkg.in/alecthomas/gometalinter.v2
-	@gometalinter.v2 --install
+	go mod tidy
 .PHONY: depend
 
 # Format all go files
