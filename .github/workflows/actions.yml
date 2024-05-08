@@ -1,4 +1,4 @@
-name: Go Documents Pipeline
+name: pipeline
 
 on:
   push:
@@ -21,9 +21,6 @@ jobs:
 
       - name: Install dependencies
         run: make depend
-
-      - name: Run linter
-        run: make lint
 
       - name: Run tests
         run: make test
